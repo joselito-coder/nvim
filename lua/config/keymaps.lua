@@ -191,9 +191,9 @@ map("n", "<leader>uI", function() vim.treesitter.inspect_tree() vim.api.nvim_inp
 map("n", "<leader>L", function() LazyVim.news.changelog() end, { desc = "LazyVim Changelog" })
 
 -- floating terminal
-map("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
-map("n", "<leader>ft", function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, { desc = "Terminal (Root Dir)" })
-
+-- map("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
+-- map("n", "<leader>ft", function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, { desc = "Terminal (Root Dir)" })
+--
 -- map({"n","t"}, "<c-/>",function() Snacks.terminal.focus(nil, { cwd = LazyVim.root() }) end, { desc = "Terminal (Root Dir)" })
 -- map({"n","t"}, "<c-_>",function() Snacks.terminal.focus(nil, { cwd = LazyVim.root() }) end, { desc = "which_key_ignore" })
 --
@@ -218,14 +218,17 @@ map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map({"n", "x"}, "<localleader>r", function() Snacks.debug.run() end, { desc = "Run Lua", ft = "lua" })
 
 
+-- use `vim.keymap.set` instead
+map = vim.keymap.set
+
 -- custom keymaps
 
-vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("n", "=ap", "ma=ap'a")
+map("n", "J", "mzJ`z")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
+map("n", "=ap", "ma=ap'a")
 
 -- Buffer manipulation
 
@@ -233,7 +236,7 @@ vim.keymap.set("n", "=ap", "ma=ap'a")
 map("n","<leader>pe", function() require("telescope.builtin").buffers() end, {desc = "Navigate open file buffers"})
 
 -- delete current buffer
-vim.keymap.set("n", "<leader>bd", function()
+map("n", "<leader>bd", function()
   local buf = vim.api.nvim_get_current_buf()
   local ft = vim.bo[buf].filetype
 
@@ -254,8 +257,15 @@ vim.keymap.set("n", "<leader>bd", function()
   Snacks.bufdelete(buf)
 end, { desc = "Delete Buffer (safe)" })
 
+
+
+
+
+
+
+
 -- search buffer and delete
-vim.keymap.set("n", "<leader>pd", function()
+map("n", "<leader>pd", function()
   require("telescope.builtin").buffers({
     attach_mappings = function(_, map)
       local function delete_buf(prompt_bufnr)
@@ -269,3 +279,15 @@ vim.keymap.set("n", "<leader>pd", function()
     end,
   })
 end, { desc = "Search and delete buffer" })
+
+
+-- Toggle terminal with Ctrl+Shift+;
+-- Works on terminals with Kitty keyboard protocol support
+map({ "n", "t" }, "<C-S-;>", function()
+  Snacks.terminal.toggle()
+end, { desc = "Toggle Terminal" })
+
+
+-- Unbind ctrl+/ and ctrl+_
+vim.keymap.del({ "n", "t" }, "<C-/>")
+vim.keymap.del({ "n", "t" }, "<C-_>")

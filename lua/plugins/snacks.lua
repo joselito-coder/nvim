@@ -2,7 +2,7 @@ return {
 	"folke/snacks.nvim",
 	opts = {
 		explorer = {
-			replace_netrw = true, -- only valid options here
+			replace_netrw = true,
 		},
 		picker = {
 			sources = {
