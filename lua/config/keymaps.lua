@@ -288,7 +288,31 @@ map({ "n", "t" }, "<leader>tt", function()
 end, { desc = "Toggle Terminal" })
 
 
+-- Create a new file using telescope
+vim.keymap.set("n", "<leader>fn", function()
+  require("telescope.builtin").find_files({
+    attach_mappings = function(_, map)
+      map("i", "<CR>", function(prompt_bufnr)
+        local entry = require("telescope.actions.state").get_current_line()
+        require("telescope.actions").close(prompt_bufnr)
+        vim.cmd("edit " .. entry)
+      end)
+      return true
+    end,
+  })
+end)
 
--- Unbind ctrl+/ and ctrl+_
-vim.keymap.del({ "n", "t" }, "<C-/>")
-vim.keymap.del({ "n", "t" }, "<C-_>")
+vim.keymap.set("n", "<leader>fd", function()
+  require("telescope.builtin").find_files({
+    prompt_title = "Delete File",
+    attach_mappings = function(_, map)
+      map("i", "<CR>", function(prompt_bufnr)
+        local file = require("telescope.actions.state").get_selected_entry()[1]
+        require("telescope.actions").close(prompt_bufnr)
+        vim.fn.delete(file)
+        print("Deleted: " .. file)
+      end)
+      return true
+    end,
+  })
+end)

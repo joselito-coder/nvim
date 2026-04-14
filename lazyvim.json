@@ -1,6 +1,7 @@
 {
   "extras": [
     "lazyvim.plugins.extras.editor.fzf",
+    "lazyvim.plugins.extras.editor.mini-files",
     "lazyvim.plugins.extras.lang.tailwind"
   ],
   "install_version": 8,
