@@ -4,6 +4,10 @@ return {
 
 		opts = {
 			lsp = {
+				progress = {
+					enabled = false,
+				},
+
 				signature = {
 					enabled = false,
 				},

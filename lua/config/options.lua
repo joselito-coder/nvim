@@ -14,3 +14,31 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- Detect filetype from shebang for extensionless files
+vim.filetype.add({
+	pattern = {
+		[".*"] = {
+			priority = -math.huge, -- run last, only if nothing else matched
+			function(path, bufnr)
+				local first_line = vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1] or ""
+
+				if first_line:match("^#!.*/bin/bash") or first_line:match("^#!.*/usr/bin/env bash") then
+					return "bash"
+				end
+				if first_line:match("^#!.*/bin/sh") or first_line:match("^#!.*/usr/bin/env sh") then
+					return "sh"
+				end
+				if first_line:match("^#!.*/usr/bin/env python") or first_line:match("^#!.*/bin/python") then
+					return "python"
+				end
+				if first_line:match("^#!.*/usr/bin/env node") or first_line:match("^#!.*/bin/node") then
+					return "javascript"
+				end
+				if first_line:match("^#!.*/usr/bin/env ruby") or first_line:match("^#!.*/bin/ruby") then
+					return "ruby"
+				end
+			end,
+		},
+	},
+})

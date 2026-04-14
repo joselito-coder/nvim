@@ -283,9 +283,10 @@ end, { desc = "Search and delete buffer" })
 
 -- Toggle terminal with Ctrl+Shift+;
 -- Works on terminals with Kitty keyboard protocol support
-map({ "n", "t" }, "<C-S-;>", function()
+map({ "n", "t" }, "<leader>tt", function()
   Snacks.terminal.toggle()
 end, { desc = "Toggle Terminal" })
+
 
 
 -- Unbind ctrl+/ and ctrl+_

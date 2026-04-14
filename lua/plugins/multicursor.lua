@@ -8,8 +8,8 @@ return {
 			["Select All"] = "<C-A-n>", -- select ALL matches at once
 			["Skip Region"] = "<C-x>", -- skip current, go to next
 			["Remove Region"] = "<C-p>", -- undo last added cursor
-			["Add Cursor Down"] = "<C-j>", -- add cursor on line below
-			["Add Cursor Up"] = "<C-k>", -- add cursor on line above
+			["Add Cursor Down"] = "<C-,>", -- add cursor on line below
+			["Add Cursor Up"] = "<C-.>", -- add cursor on line above
 		}
 	end,
 }
