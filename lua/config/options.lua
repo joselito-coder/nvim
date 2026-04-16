@@ -17,6 +17,8 @@ vim.opt.smartindent = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.opt.formatoptions:remove({ "c", "r", "o" })
+
 -- Detect filetype from shebang for extensionless files
 vim.filetype.add({
 	pattern = {

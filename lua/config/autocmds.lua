@@ -47,8 +47,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 			if session_exists then
 				persistence.load()
-			else
-				Snacks.explorer()
 			end
 		end)
 	end,
