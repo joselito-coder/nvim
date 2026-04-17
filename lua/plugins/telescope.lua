@@ -7,15 +7,12 @@ return {
 
 	opts = {
 		defaults = {
-			file_ignore_pattersn = { "^.git/" },
+			file_ignore_patterns = { "^.git/", "node_modules/" },
 		},
 		pickers = {
 			find_files = {
-				hidden = true,
+				find_command = { "rg", "--files", "--hidden", "--iglob", "!.git" },
 			},
-		},
-		live_grep = {
-			additional_args = { "--hidden" },
 		},
 	},
 
@@ -32,9 +29,14 @@ return {
 		vim.keymap.set("n", "<leader>pf", function()
 			builtin.find_files({
 				cwd = vim.fn.getcwd(),
+				find_command = { "rg", "--files", "--hidden", "--iglob", "!.git" },
 			})
 		end, { desc = "find files" })
-		vim.keymap.set("n", "<C-t>", builtin.find_files, { desc = "Find files but with ctrl+t" })
+		vim.keymap.set("n", "<C-t>", function()
+			builtin.find_files({
+				find_command = { "rg", "--files", "--hidden", "--iglob", "!.git" },
+			})
+		end, { desc = "Find files with ctrl+t" })
 		vim.keymap.set("n", "<C-p>", builtin.git_files, {})
 		vim.keymap.set("n", "<leader>pws", function()
 			local word = vim.fn.expand("<cword>")
