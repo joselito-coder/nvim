@@ -6,16 +6,12 @@ vim.opt.winbar = "%=%m %f"
 
 vim.opt.wrap = true
 
-vim.opt.clipboard = ""
-
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 vim.opt.formatoptions:remove({ "c", "r", "o" })
 
