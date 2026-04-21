@@ -1,51 +1,52 @@
 return {
 	"nvim-telescope/telescope.nvim",
-
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 	},
-
-	opts = {
-		defaults = {
-			file_ignore_patterns = { "^.git/", "node_modules/" },
-		},
-		pickers = {
-			find_files = {
-				find_command = { "rg", "--files", "--hidden", "--iglob", "!.git" },
-			},
-		},
-	},
-
 	config = function()
+		local actions = require("telescope.actions")
+		local builtin = require("telescope.builtin")
+
 		require("telescope").setup({
 			defaults = {
+				file_ignore_patterns = { "^.git/", "node_modules/" },
 				layout_config = {
 					vertical = { width = 0.7 },
+				},
+				mappings = {
+					i = {
+						["<C-j>"] = actions.move_selection_next,
+						["<C-k>"] = actions.move_selection_previous,
+					},
+					n = {
+						["<C-j>"] = actions.move_selection_next,
+						["<C-k>"] = actions.move_selection_previous,
+					},
+				},
+			},
+			pickers = {
+				find_files = {
+					find_command = { "rg", "--files", "--hidden", "--iglob", "!.git" },
 				},
 			},
 		})
 
-		local builtin = require("telescope.builtin")
 		vim.keymap.set("n", "<leader>pf", function()
-			builtin.find_files({
-				cwd = vim.fn.getcwd(),
-				find_command = { "rg", "--files", "--hidden", "--iglob", "!.git" },
-			})
-		end, { desc = "find files" })
+			builtin.find_files({ cwd = vim.fn.getcwd() })
+		end, { desc = "Find files" })
+
 		vim.keymap.set("n", "<C-t>", function()
-			builtin.find_files({
-				find_command = { "rg", "--files", "--hidden", "--iglob", "!.git" },
-			})
-		end, { desc = "Find files with ctrl+t" })
+			builtin.find_files()
+		end, { desc = "Find files" })
+
 		vim.keymap.set("n", "<C-p>", builtin.git_files, {})
+
 		vim.keymap.set("n", "<leader>pws", function()
-			local word = vim.fn.expand("<cword>")
-			builtin.grep_string({ search = word })
+			builtin.grep_string({ search = vim.fn.expand("<cword>") })
 		end)
 
 		vim.keymap.set("n", "<leader>pWs", function()
-			local word = vim.fn.expand("<cWORD>")
-			builtin.grep_string({ search = word })
+			builtin.grep_string({ search = vim.fn.expand("<cWORD>") })
 		end)
 
 		vim.keymap.set("n", "<leader>ps", function()
