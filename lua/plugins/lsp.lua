@@ -21,7 +21,7 @@ return {
 				"vtsls",
 				"tailwindcss",
 				"eslint",
-				"pylsp",
+				"jedi_language_server",
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)

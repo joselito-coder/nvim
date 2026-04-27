@@ -288,6 +288,16 @@ map({ "n", "t" }, "<leader>tt", function()
 end, { desc = "Toggle Terminal" })
 
 
+vim.keymap.del("n", "<leader>e")
+
+map({ "n", "t" }, "<leader>ep", function()
+    local currentFile = vim.fn.expand("%")
+    print(currentFile)
+  Snacks.terminal.toggle("python3 "..currentFile, { auto_close = false} )
+end, { desc = "Execute python ( current file ) " })
+
+
+
 -- Create a new file using telescope
 vim.keymap.set("n", "<leader>fn", function()
   require("telescope.builtin").find_files({
@@ -341,7 +351,6 @@ vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d")
 
 vim.keymap.set("n", "Q", "<nop>")
 
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 

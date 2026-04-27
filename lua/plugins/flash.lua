@@ -7,7 +7,15 @@ return {
 			"zk",
 			mode = { "n", "x", "o" },
 			function()
-				require("flash").jump()
+				require("flash").jump({ jump = { pos = "end" } })
+			end,
+			desc = "Flash",
+		},
+		{
+			"zK",
+			mode = { "n", "x", "o" },
+			function()
+				require("flash").jump({ jump = { pos = "start" } })
 			end,
 			desc = "Flash",
 		},
