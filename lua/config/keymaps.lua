@@ -258,12 +258,6 @@ map("n", "<leader>bd", function()
 end, { desc = "Delete Buffer (safe)" })
 
 
-
-
-
-
-
-
 -- search buffer and delete
 map("n", "<leader>pd", function()
   require("telescope.builtin").buffers({
