@@ -58,7 +58,11 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.hl.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
+
+local autocmd = vim.api.nvim_create_autocmd
+
+
+autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function() vim.hl.on_yank() end,
@@ -89,6 +93,15 @@ vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>o", "<cmd>:w !sudo tee %<CR>", { silent = true })
+
+autocmd('LspAttach', {
+
+  callback = function ()
+    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+  end
+
+} )
+
 
 
 -- vim: ts=2 sts=2 sw=2 et
