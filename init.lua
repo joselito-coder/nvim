@@ -1,4 +1,3 @@
-
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -11,7 +10,6 @@ vim.g.have_nerd_font = true
 -- [[ Setting options ]]
 require 'options'
 
-
 -- [[ Autocmds ]]
 require 'autocmd'
 
@@ -23,6 +21,9 @@ require 'lazy-bootstrap'
 
 -- [[ Configure and install plugins ]]
 require 'lazy-plugins'
+
+-- load snippets from path/of/your/nvim/config/my-cool-snippets
+require('luasnip.loaders.from_vscode').lazy_load { paths = { './snippets/' } }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
