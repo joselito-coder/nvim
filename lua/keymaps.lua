@@ -93,6 +93,8 @@ vim.keymap.set('n', '<leader>o', '<cmd>:w !sudo tee %<CR>', { silent = true })
 
 vim.keymap.set('n', '<leader>bd', '<cmd>:bd<cr>', { desc = 'Delete Buffer ' })
 
+vim.keymap.set('n', '<leader>tk', function() require('persistence').load() end)
+
 autocmd('LspAttach', {
     callback = function()
         vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
