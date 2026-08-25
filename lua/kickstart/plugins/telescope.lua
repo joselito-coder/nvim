@@ -112,6 +112,20 @@ return {
             vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
             vim.keymap.set('n', '<leader>pe', builtin.buffers, { desc = '[ ] Find existing buffers' })
             vim.keymap.set('n', '<leader>pr', function() require('telescope').extensions.recent_files.pick() end, { desc = '[ ] find recently created files' })
+            vim.keymap.set(
+                'n',
+                '<leader>pg',
+                function()
+                    require('telescope.builtin').find_files {
+                        find_command = {
+                            'git',
+                            'ls-files',
+                            '--others',
+                            '--exclude-standard',
+                        },
+                    }
+                end
+            )
 
             vim.keymap.set(
                 'n',
