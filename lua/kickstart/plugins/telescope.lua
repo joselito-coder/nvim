@@ -38,6 +38,7 @@ return {
 
             -- Useful for getting pretty icons, but requires a Nerd Font.
             { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+            'smartpde/telescope-recent-files',
         },
         config = function()
             -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -86,12 +87,16 @@ return {
                 },
                 extensions = {
                     ['ui-select'] = { require('telescope.themes').get_dropdown() },
+                    recent_files = {
+                        only_cwd = true,
+                    },
                 },
             }
 
             -- Enable Telescope extensions if they are installed
             pcall(require('telescope').load_extension, 'fzf')
             pcall(require('telescope').load_extension, 'ui-select')
+            pcall(require('telescope').load_extension 'recent_files')
 
             -- See `:help telescope.builtin`
             local builtin = require 'telescope.builtin'
@@ -106,6 +111,7 @@ return {
             vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
             vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
             vim.keymap.set('n', '<leader>pe', builtin.buffers, { desc = '[ ] Find existing buffers' })
+            vim.keymap.set('n', '<leader>pr', function() require('telescope').extensions.recent_files.pick() end, { desc = '[ ] find recently created files' })
 
             vim.keymap.set(
                 'n',
