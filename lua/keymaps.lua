@@ -101,4 +101,7 @@ autocmd('LspAttach', {
     end,
 })
 
+vim.keymap.set('n', 'tl', '<cmd>bnext<cr>', { desc = 'Next buffer' })
+vim.keymap.set('n', 'th', '<cmd>bprevious<cr>', { desc = 'Previous buffer' })
+
 -- vim: ts=2 sts=2 sw=2 et
