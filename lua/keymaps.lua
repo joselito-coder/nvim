@@ -104,4 +104,17 @@ autocmd('LspAttach', {
 vim.keymap.set('n', 'tl', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 vim.keymap.set('n', 'th', '<cmd>bprevious<cr>', { desc = 'Previous buffer' })
 
+vim.keymap.set({ 'n', 't' }, '<leader>ep', function()
+    local currentFile = vim.fn.expand '%'
+    print(currentFile)
+    Snacks.terminal.toggle('python3 ' .. currentFile, {
+        auto_close = false,
+        win = {
+            width = 0.8,
+            height = 0.8,
+            border = 'rounded',
+        },
+    })
+end, { desc = 'Execute python ( current file ) ' })
+
 -- vim: ts=2 sts=2 sw=2 et
